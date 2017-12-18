@@ -10,9 +10,9 @@ CREATE TABLE `inm_user` (
 	`ca_id` VARCHAR(10) NOT NULL,
 	`level` VARCHAR(10) NOT NULL,
 	`status_id` INT(2) NOT NULL,
-	`mac_address` VARCHAR(30) NOT NULL,
+	`mac_address` VARCHAR(30),
 	`nama_user` VARCHAR(20) NOT NULL,
-	`ip_address` VARCHAR(20) NOT NULL,
+	`ip_address` VARCHAR(20),
 	`cookie` VARCHAR(50),
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
