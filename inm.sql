@@ -13,7 +13,7 @@ CREATE TABLE `inm_user` (
 	`mac_address` VARCHAR(30) NOT NULL,
 	`nama_user` VARCHAR(20) NOT NULL,
 	`ip_address` VARCHAR(20) NOT NULL,
-	`cookie` VARCHAR(50) NOT NULL,
+	`cookie` VARCHAR(50),
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
