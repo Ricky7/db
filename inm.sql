@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `inm_produk` (
 	`vendor` VARCHAR(10) NOT NULL,
 	`kode_vendor` INT(5) NOT NULL,
 	`kode_produk_vendor` VARCHAR(10) NOT NULL,
+    `keterangan` VARCHAR(30) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -141,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
 	`kode_supplier` VARCHAR(20) NOT NULL,
 	`print_out` TEXT NOT NULL,
 	`keterangan` VARCHAR(200) NOT NULL,
-	`response_messsage`TEXT NOT NULL,
+	`response_message` TEXT NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
 DROP TABLE IF EXISTS `inm_deposit_tiket`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_tiket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_point_id` VARCHAR(20) NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
   `ca_id` VARCHAR(10) NOT NULL,
   `tgl_setor` DATETIME NOT NULL,
   `tgl_create` DATETIME NOT NULL,
@@ -185,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_tiket` (
   `akun_bank_id` INT(2) NOT NULL,
   `keterangan` VARCHAR(100),
   `nominal` DECIMAL(19,0) NOT NULL,
-  `status_id` INT(2) NOT NULL, 
+  `status_id` INT(2) NOT NULL,
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
 
@@ -262,8 +263,19 @@ CREATE TABLE IF NOT EXISTS `inm_global_kolektif_detail` (
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_log_enquiry`;
+DROP TABLE IF EXISTS `inm_log_transaksi`;
+CREATE TABLE `inm_log_transaksi` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `jenis_log` INT(2) NOT NULL,
+  `id_user` BIGINT UNSIGNED NOT NULL,
+  `response_message` TEXT NOT NULL,
+  `response_json` TEXT NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_log_payment`;
-
-DROP TABLE IF EXISTS `inm_log_deposit`;
+DROP TABLE IF EXISTS `inm_jenis_log`;
+CREATE TABLE `inm_jenis_log` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_log` VARCHAR(20) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
