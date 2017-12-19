@@ -1,0 +1,230 @@
+** inm_produk
+- produk_id | int(11)
+- jenis_produk_id | int(11)
+- nama_singkat | varchar(20)
+- nama_lengkap | varchar(20)
+- kode_produk | int(5)
+- vendor | varchar(10)
+- kode_vendor | int(5)
+- kode_produk_vendor | varchar(20)
+
+** inm_jenis_produk
+- jenis_produk_id | int(11)
+- kode_jenis | varchar(10)
+- nama_jenis | varchar(20)
+
+keterangan
+1. PLN
+2. PDAM
+3. BPJS
+
+** inm_saldo_loket
+- saldo_id | int(11)
+- user_id | int(11)
+- jumlah_saldo | int(10)
+- tgl_update | datetime
+
+** inm_history_saldo
+- history_id | int(11)
+- user_id | int(11)
+- status_history_id | int(11)
+- jenis_transaksi | varchar(30)
+- jumlah_transaksi | int(10)
+- tgl_create | datetime
+- tgl_update | datetime
+
+** inm_status_history
+- status_history_id | int(11)
+- nama_status | varchar(10)
+
+keterangan status_history
+* proses beli saldo :
+- 1 --> waiting -> request dikirim tapi belum transfer
+- 2 --> proses -> data transfer valid, proses pengisian
+- 3 --> sukses -> saldo sudah diisi
+- 4 --> gagal -> request gagal, nominal tidak valid
+- 5 --> refund -> pembayaran dikembalikan, salah transfer
+- 6 --> expired -> request kadaluarsa
+
+* proses jual saldo :
+- 7 --> sukses -> pembayaran sukses
+- 8 --> gagal -> pembayaran gagal*
+
+** inm_transaksi
+- transaksi_id | int(11)
+- user_id | int(11)
+- kode_transaksi | varchar(50)
+- tgl_transaksi | datetime
+
+** inm_transaksi_detail
+- transaksi_detail_id | int(11)
+- transaksi_id | int(11)
+- status_id | int(11)
+- nama_pelanggan | varchar(30)
+- lembar | int(2)
+- jumlah_tagihan | int(10)
+- biaya_admin | int(5)
+- total_tagihan | int(10)
+- jenis_transaksi | varchar(20)
+- inf_referensi | varchar(10)
+- terbilang | varchar(30)
+- kode_cetak | varchar(20)
+- kode_supplier | varchar(20)
+- print_out | varchar(200)
+	note : field untuk menyimpan data struk
+- keterangan | varchar(200)
+-- (tarif daya, BL/TH, stand meter, non_subsidi) --> PLN postpaid
+-- (tarif daya, jumlah_kwh, no_token) --> PLN prepaid
+-- (jenis_transaksi, no_registrasi, tgl_registrasi) --> PLN non-taglis
+-- (kode_pdam, golongan, periode, meteran) --> PDAM
+-- (kode_telkom, divre/datel, periode) --> TELKOM
+-- (kode_hp, divre/datel, periode) --> pulsa	
+
+** inm_transaksi_detail_status
+- transaksi_detail_status_id | int(11)
+- nama_status | varchar(20)
+keterangan status transaksi detail
+- proses -> transaksi proses
+- gagal -> transaksi gagal
+- sukses -> transaksi sukses
+
+** inm_admin
+- admin_id | int(11)
+- nama_admin | varchar(30)
+- payment_point_id | int(11)
+- cmId *
+- jenis_admin_id | int(11)
+- username | varchar(15)
+- password | varchar(15)
+- last_ip_address | varchar(20)
+- last_login | datetime
+- last_logout | datetime
+- last_update | datetime
+- mac_address | varchar(30)
+- tgl_create | datetime
+- status_id | int(11)
+- guna *
+- printer *
+- cookie | varchar(50)
+
+** inm_jenis_admin
+- jenis_admin_id | int(11)
+- nama_jenis | varchar(20)
+keterangan:
+- Super Administrator
+- Administrator
+- Rekon
+- Helpdesk
+
+** inm_jenis_detail
+- jenis_detail_id| int(11)
+- jenis_id | int(11)
+- fungsi_admin_id | int(11)
+
+** inm_fungsi_admin
+- fungsi_admin_id | int(11)
+- nama_fungsi | varchar(20)
+
+** inm_status_admin
+- status_admin_id | int(11)
+- nama_status | varchar(10)
+
+** inm_user
+- user_id | int(11)
+- payment_point_id | int(11)
+- group_id | int(11)
+- password | varchar(20)
+- ca_id | varchar(10)
+- level | varchar(10) --> Loket / Group
+- status_id | INT(2)
+- mac_address | varchar(30)
+- nama | varchar(20)
+- printer *
+- ip_address | varchar(20)
+- cookie | varchar(50)
+
+** inm_user_status
+- user_status_id | int
+- nama_status | varchar(10)
+keterangan :
+- UNBLOCK --> user tidak diblock
+- BLOCK --> user di block
+
+//update
+** inm_akun_bank
+- akun_bank_id | int
+- nama_bank | varchar(10)
+- no_rekening | varchar(20)
+- nama_akun | varchar(50)
+
+** inm_deposit_langsung
+- deposit_langsung_id | BIGINT
+- payment_point_id | varchar(12)
+- tgl_setor | date
+- tgl_buat | datetime
+- nominal | decimal(19.0)
+- keterangan | varchar(50) --> Titipan dll
+- idcms* ????
+- admin_id | INT
+- bukti_bayar | varchar(30) 
+
+** inm_deposit_tiket
+- deposit_tiket_id | BIGINT
+- payment_point_id | varchar(12)
+- ca_id | varchar(10)
+- tgl_setor | datetime
+- tgl_buat | datetime
+- metode_bayar | varchar(10) --> transfer
+- X penyetor | BIGINT
+- akun_bank_id | int
+- keterangan | varchar(100)
+- nominal | decimal(19.0)
+- status_id | int
+
+** inm_deposit_tiket_status
+- deposit_status_tiket_id | int
+- nama_status | varchar(10)
+keterangan 
+- PROSES -> menunggu rekon
+- SUKSES -> sudah di rekon
+
+** inm_mutasi_bank
+- mutasi_bank_id | BIGINT
+- raw | vachar(50) --> mentahan dari csv
+- nama_bank | varchar(10)
+- no_rekening | varchar(20)
+- tgl_buat | datetime
+- tgl_transfer | date
+- waktu_transfer | time
+- keterangan | varchar(100)
+- debit | decimal(19.0)
+- kredit | decimal(19.0)
+- status_id | INT(5)
+- ca_id | varchar(10)
+- admin_id | int
+
+** inm_mutasi_bank_status
+- mutasi_bank_status_id | INT
+- nama_status | varchar(10)
+keterangan 
+- PROSES -> menunggu rekon
+- STATUS -> sudah direkon
+
+** inm_pinjaman
+- pinjaman_id | INT
+- payment_point_id | varchar(20)
+- limit_hutang | decimal(19,0)
+- admin_id | int
+- tgl_create | datetime
+
+** kolektif
+** kolektif master (indexes no hp)
+
+
+
+
+
+
+
+
+
