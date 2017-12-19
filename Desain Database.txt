@@ -221,7 +221,17 @@ keterangan
 ** kolektif master (indexes no hp)
 ** test
 
-
+static table
+- inm_akun_bank
+- inm_jenis_admin
+- inm_jenis_log
+- inm_jenis_produk
+- inm_deposit_tiket_status
+- inm_mutasi_bank_status
+- inm_status_admin
+- inm_status_history
+- inm_transaksi_detail_status
+- inm_user_status
 
 
 
