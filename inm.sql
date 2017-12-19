@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
 	`nama_pelanggan` VARCHAR(30) NOT NULL,
 	`lembar` INT(2) NOT NULL,
 	`jumlah_tagihan` DECIMAL(19,0) NOT NULL,
-	`biaya_admin` DECIMAL(19,0) NOT NULL,
+	`biaya_admin` INT(5) NOT NULL,
 	`total_tagihan` DECIMAL(19,0) NOT NULL,
 	`jenis_transkasi` VARCHAR(20) NOT NULL,
 	`inf_referensi` VARCHAR(50) NOT NULL,
@@ -277,5 +277,14 @@ DROP TABLE IF EXISTS `inm_jenis_log`;
 CREATE TABLE `inm_jenis_log` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_log` VARCHAR(20) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_admin_fee`;
+CREATE TABLE `inm_admin_fee` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_produk` INT(5) NOT NULL,
+  `nominal` DECIMAL(19,0) NOT NULL,
+  `tgl_create` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
