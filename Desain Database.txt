@@ -13,7 +13,7 @@
 - kode_jenis | varchar(10)
 - nama_jenis | varchar(20)
 
-keterangan
+keterangan jenis produk
 1. PLN
 2. PDAM
 3. BPJS
