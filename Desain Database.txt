@@ -78,7 +78,7 @@ keterangan status_history
 -- (jenis_transaksi, no_registrasi, tgl_registrasi) --> PLN non-taglis
 -- (kode_pdam, golongan, periode, meteran) --> PDAM
 -- (kode_telkom, divre/datel, periode) --> TELKOM
--- (kode_hp, divre/datel, periode) --> pulsa	
+-- (kode_hp, divre/datel, periode) --> pulsa
 
 ** inm_transaksi_detail_status
 - transaksi_detail_status_id | int(11)
@@ -166,7 +166,7 @@ keterangan :
 - keterangan | varchar(50) --> Titipan dll
 - idcms* ????
 - admin_id | INT
-- bukti_bayar | varchar(30) 
+- bukti_bayar | varchar(30)
 
 ** inm_deposit_tiket
 - deposit_tiket_id | BIGINT
@@ -184,7 +184,7 @@ keterangan :
 ** inm_deposit_tiket_status
 - deposit_status_tiket_id | int
 - nama_status | varchar(10)
-keterangan 
+keterangan
 - PROSES -> menunggu rekon
 - SUKSES -> sudah di rekon
 
@@ -206,7 +206,7 @@ keterangan
 ** inm_mutasi_bank_status
 - mutasi_bank_status_id | INT
 - nama_status | varchar(10)
-keterangan 
+keterangan
 - PROSES -> menunggu rekon
 - STATUS -> sudah direkon
 
@@ -232,10 +232,3 @@ static table
 - inm_status_history
 - inm_transaksi_detail_status
 - inm_user_status
-
-
-
-
-
-
-

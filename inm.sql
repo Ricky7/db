@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail_status` (
 DROP TABLE IF EXISTS `inm_akun_bank`;
 CREATE TABLE IF NOT EXISTS `inm_akun_bank` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nama_bank` VARCHAR(20) NOT NULL,
+  `nama_bank` VARCHAR(30) NOT NULL,
   `no_rekening` VARCHAR(20) NOT NULL,
   `nama_akun` VARCHAR(50) NOT NULL,
   PRIMARY KEY `pk_id`(`id`)
