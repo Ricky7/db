@@ -270,6 +270,7 @@ CREATE TABLE `inm_log_transaksi` (
   `id_user` BIGINT UNSIGNED NOT NULL,
   `response_message` TEXT NOT NULL,
   `response_json` TEXT NOT NULL,
+  `tgl_create` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
