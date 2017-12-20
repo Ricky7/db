@@ -4,7 +4,10 @@
 -- nama_bank (varchar 30)
 -- no_rekening (varchar 20)
 -- nama_akun (varchar 50)
-INSERT INTO `inm_akun_bank` VALUES ('', '', '');
+INSERT INTO `inm_akun_bank` VALUES ('MANDIRI', '1050012552489', 'PT. Interprima Nusantara Mandiri');
+INSERT INTO `inm_akun_bank` VALUES ('BNI', '249745768', 'PT. Interprima Nusantara Mandiri');
+INSERT INTO `inm_akun_bank` VALUES ('BRI', '005301001652308', 'PT. Interprima Nusantara Mandiri');
+INSERT INTO `inm_akun_bank` VALUES ('Bukopin', '1003637022', 'PT. Interprima Nusantara Mandiri');
 
 
 -- tabel inm_jenis_admin
@@ -19,9 +22,11 @@ INSERT INTO `inm_jenis_admin` VALUES ('4', 'Helpdesk');
 -- tabel inm_jenis_log
 -- kode_log (int 5)
 -- nama_log (varchar 20)
-INSERT INTO `inm_jenis_log` VALUES ('1', '');
-INSERT INTO `inm_jenis_log` VALUES ('2', '');
-INSERT INTO `inm_jenis_log` VALUES ('3', '');
+INSERT INTO `inm_jenis_log` VALUES ('1', 'PLN postpaid');
+INSERT INTO `inm_jenis_log` VALUES ('2', 'PLN prepaid');
+INSERT INTO `inm_jenis_log` VALUES ('3', 'PLN nontaglis');
+INSERT INTO `inm_jenis_log` VALUES ('4', 'PDAM');
+INSERT INTO `inm_jenis_log` VALUES ('5', 'BPJS');
 
 
 -- tabel inm_jenis_produk
