@@ -20,6 +20,7 @@ CREATE TABLE `inm_user` (
 DROP TABLE IF EXISTS `inm_user_status`;
 CREATE TABLE IF NOT EXISTS `inm_user_status` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10) NOT NULL,
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
@@ -46,6 +47,7 @@ CREATE TABLE `inm_admin` (
 DROP TABLE IF EXISTS `inm_jenis_admin`;
 CREATE TABLE IF NOT EXISTS `inm_jenis_admin` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_jenis` INT(5) NOT NULL,
   `nama_jenis` VARCHAR(20),
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
@@ -61,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `inm_jenis_admin_detail` (
 DROP TABLE IF EXISTS `inm_status_admin`;
 CREATE TABLE IF NOT EXISTS `inm_status_admin` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10),
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
@@ -82,8 +85,8 @@ CREATE TABLE IF NOT EXISTS `inm_produk` (
 DROP TABLE IF EXISTS `inm_jenis_produk`;
 CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_jenis` VARCHAR(10) NOT NULL,
-	`nama_jenis` VARCHAR(20) NOT NULL,
+  `kode_jenis` INT(5) NOT NULL,
+  `nama_jenis` VARCHAR(20) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -111,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `inm_history_saldo` (
 DROP TABLE IF EXISTS `inm_status_history`;
 CREATE TABLE IF NOT EXISTS `inm_status_history` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
@@ -149,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
 DROP TABLE IF EXISTS `inm_transaksi_detail_status`;
 CREATE TABLE IF NOT EXISTS `inm_transaksi_detail_status` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(20) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
@@ -193,6 +198,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_tiket` (
 DROP TABLE IF EXISTS `inm_deposit_tiket_status`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_tiket_status` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10) NOT NULL,
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
@@ -218,6 +224,7 @@ CREATE TABLE IF NOT EXISTS `inm_mutasi_bank` (
 DROP TABLE IF EXISTS `inm_mutasi_bank_status`;
 CREATE TABLE IF NOT EXISTS `inm_mutasi_bank_status` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10),
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
@@ -277,6 +284,7 @@ CREATE TABLE `inm_log_transaksi` (
 DROP TABLE IF EXISTS `inm_jenis_log`;
 CREATE TABLE `inm_jenis_log` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_log` INT(5) NOT NULL,
   `nama_log` VARCHAR(20) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;

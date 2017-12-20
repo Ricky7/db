@@ -208,7 +208,7 @@ keterangan
 - nama_status | varchar(10)
 keterangan
 - PROSES -> menunggu rekon
-- STATUS -> sudah direkon
+- SUKSES -> sudah direkon
 
 ** inm_pinjaman
 - pinjaman_id | INT
