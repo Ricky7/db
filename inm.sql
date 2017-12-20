@@ -1,5 +1,5 @@
 -- DROP DATABASE `inm`;
-CREATE DATABASE `inm` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- CREATE DATABASE `inm` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `inm_user`;
 CREATE TABLE `inm_user` (
@@ -278,6 +278,17 @@ CREATE TABLE `inm_log_transaksi` (
   `response_message` TEXT NOT NULL,
   `response_json` TEXT NOT NULL,
   `tgl_create` DATETIME NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_log_transaksi_status`;
+CREATE TABLE `inm_log_transaksi_status` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_log_transaksi` BIGINT UNSIGNED NOT NULL,
+  `pesan` VARCHAR(100) NOT NULL,
+  `tipe` VARCHAR(20) NOT NULL,
+  `tgl_create` DATETIME NOT NULL,
+  `no_pelanggan` VARCHAR(30) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 

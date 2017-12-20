@@ -20,6 +20,8 @@ INSERT INTO `inm_jenis_admin` VALUES ('4', 'Helpdesk');
 -- kode_log (int 5)
 -- nama_log (varchar 20)
 INSERT INTO `inm_jenis_log` VALUES ('1', '');
+INSERT INTO `inm_jenis_log` VALUES ('2', '');
+INSERT INTO `inm_jenis_log` VALUES ('3', '');
 
 
 -- tabel inm_jenis_produk
