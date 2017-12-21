@@ -281,16 +281,16 @@ CREATE TABLE `inm_log_transaksi` (
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_log_transaksi_status`;
-CREATE TABLE `inm_log_transaksi_status` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_log_transaksi` BIGINT UNSIGNED NOT NULL,
-  `pesan` VARCHAR(100) NOT NULL,
-  `tipe` VARCHAR(20) NOT NULL,
-  `tgl_create` DATETIME NOT NULL,
-  `no_pelanggan` VARCHAR(30) NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
+-- DROP TABLE IF EXISTS `inm_log_transaksi_status`;
+-- CREATE TABLE `inm_log_transaksi_status` (
+--   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+--   `id_log_transaksi` BIGINT UNSIGNED NOT NULL,
+--   `pesan` VARCHAR(100) NOT NULL,
+--   `tipe` VARCHAR(20) NOT NULL,
+--   `tgl_create` DATETIME NOT NULL,
+--   `no_pelanggan` VARCHAR(30) NOT NULL,
+--   PRIMARY KEY `pk_`(`id`)
+-- ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_jenis_log`;
 CREATE TABLE `inm_jenis_log` (
