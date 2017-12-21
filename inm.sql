@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
 	`kode_supplier` VARCHAR(20) NOT NULL,
 	`print_out` TEXT NOT NULL,
 	`keterangan` VARCHAR(200) NOT NULL,
-	`response_message` TEXT NOT NULL,
+	`response` TEXT NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `inm_mutasi_bank_status` (
 DROP TABLE IF EXISTS `inm_pinjaman`;
 CREATE TABLE IF NOT EXISTS `inm_pinjaman` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_point_id` VARCHAR(20) NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
   `limit_pinjaman` DECIMAL(19,0) NOT NULL,
   `admin_id` INT UNSIGNED NOT NULL,
   `tgl_create` DATETIME NOT NULL,
@@ -271,10 +271,10 @@ CREATE TABLE IF NOT EXISTS `inm_global_kolektif_detail` (
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_log_transaksi`;
-CREATE TABLE `inm_log_transaksi` (
+CREATE TABLE IF NOT EXISTS `inm_log_transaksi` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `jenis_log` INT(2) NOT NULL,
-  `id_user` BIGINT UNSIGNED NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
   `response_message` TEXT NOT NULL,
   `response_json` TEXT NOT NULL,
   `tgl_create` DATETIME NOT NULL,
