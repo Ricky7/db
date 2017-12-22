@@ -12,6 +12,7 @@ INSERT INTO `inm_akun_bank` VALUES ('4', 'Bukopin', '1003637022', 'PT. Interprim
 
 
 -- tabel inm_jenis_admin
+-- id
 -- kode_jenis (int 5)
 -- nama_jenis (varchar 20)
 INSERT INTO `inm_jenis_admin` VALUES ('1', '1', 'Superadmin');
@@ -21,6 +22,7 @@ INSERT INTO `inm_jenis_admin` VALUES ('4', '4', 'Helpdesk');
 
 
 -- tabel inm_jenis_log
+-- id
 -- kode_log (int 5)
 -- nama_log (varchar 20)
 INSERT INTO `inm_jenis_log` VALUES ('1', '1', 'PLN postpaid');
@@ -31,6 +33,7 @@ INSERT INTO `inm_jenis_log` VALUES ('5', '5', 'BPJS');
 
 
 -- tabel inm_jenis_produk
+-- id
 -- kode_jenis (int 5)
 -- nama_jenis (varchar 20)
 INSERT INTO inm_jenis_produk
@@ -41,6 +44,7 @@ VALUES
 
 
 -- tabel inm_deposit_tiket_status
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_deposit_tiket_status` VALUES ('1', '1', 'proses');
@@ -48,6 +52,7 @@ INSERT INTO `inm_deposit_tiket_status` VALUES ('2', '2', 'sukses');
 
 
 -- tabel inm_deposit_langsung_status
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_deposit_langsung_status` VALUES ('1', '1', 'proses');
@@ -55,6 +60,7 @@ INSERT INTO `inm_deposit_langsung_status` VALUES ('2', '2', 'sukses');
 
 
 -- tabel inm_mutasi_bank_status
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_mutasi_bank_status` VALUES ('1', '1', 'proses');
@@ -62,6 +68,7 @@ INSERT INTO `inm_mutasi_bank_status` VALUES ('2', '2', 'sukses');
 
 
 -- tabel inm_status_admin
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_status_admin` VALUES ('1', '0', 'unblock');
@@ -69,6 +76,7 @@ INSERT INTO `inm_status_admin` VALUES ('2', '1', 'block');
 
 
 -- tabel inm_status_history
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_status_history` VALUES ('1', '1', 'waiting');
@@ -80,6 +88,7 @@ INSERT INTO `inm_status_history` VALUES ('6', '6', 'expired');
 
 
 -- tabel inm_transaksi_detail_status
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 20)
 INSERT INTO `inm_transaksi_detail_status` VALUES ('1', '0', 'proses');
@@ -88,6 +97,7 @@ INSERT INTO `inm_transaksi_detail_status` VALUES ('3', '2', 'sukses');
 
 
 -- tabel inm_user_status
+-- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_user_status` VALUES ('1', '0', 'unblock');
