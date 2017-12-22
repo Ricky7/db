@@ -177,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
   `keterangan` VARCHAR(50),
   `admin_id` INT NOT NULL,
   `bukti_bayar` VARCHAR(30) NOT NULL,
+  `status_id` INT(2) NOT NULL,
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
 
@@ -197,6 +198,14 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_tiket` (
 
 DROP TABLE IF EXISTS `inm_deposit_tiket_status`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_tiket_status` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_status` INT(5) NOT NULL,
+  `nama_status` VARCHAR(10) NOT NULL,
+  PRIMARY KEY `pk_id`(`id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_deposit_langsung_status`;
+CREATE TABLE IF NOT EXISTS `inm_deposit_langsung_status` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `kode_status` INT(5) NOT NULL,
   `nama_status` VARCHAR(10) NOT NULL,

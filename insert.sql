@@ -40,12 +40,18 @@ VALUES
 ('3', '3', 'BPJS');
 
 
-
 -- tabel inm_deposit_tiket_status
 -- kode_status (int 5)
 -- nama_status (varchar 10)
 INSERT INTO `inm_deposit_tiket_status` VALUES ('1', '1', 'proses');
 INSERT INTO `inm_deposit_tiket_status` VALUES ('2', '2', 'sukses');
+
+
+-- tabel inm_deposit_langsung_status
+-- kode_status (int 5)
+-- nama_status (varchar 10)
+INSERT INTO `inm_deposit_langsung_status` VALUES ('1', '1', 'proses');
+INSERT INTO `inm_deposit_langsung_status` VALUES ('2', '2', 'sukses');
 
 
 -- tabel inm_mutasi_bank_status
