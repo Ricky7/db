@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `inm_akun_bank` (
 DROP TABLE IF EXISTS `inm_deposit_langsung`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_point_id` VARCHAR(20) NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
   `tgl_setor` DATE NOT NULL,
   `tgl_create` DATETIME NOT NULL,
   `nominal` DECIMAL(19,0) NOT NULL,
