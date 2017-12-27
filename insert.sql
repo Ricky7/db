@@ -102,3 +102,22 @@ INSERT INTO `inm_transaksi_detail_status` VALUES ('3', '2', 'sukses');
 -- nama_status (varchar 10)
 INSERT INTO `inm_user_status` VALUES ('1', '0', 'unblock');
 INSERT INTO `inm_user_status` VALUES ('2', '1', 'block');
+
+
+-- tabel inm_admin
+INSERT INTO `inm_admin` VALUES ('1', 'TesDev', '100tesdev001', 'inm101', '1', 'tesdev', 'tesdev', '', NULL, NULL, NULL, '', CURDATE(), '0');
+
+-- tabel inm_jenis_fee
+INSERT INTO `inm_jenis_fee` VALUES ('1', '1', 'PLN');
+INSERT INTO `inm_jenis_fee` VALUES ('2', '2', 'PLN Nontaglis');
+INSERT INTO `inm_jenis_fee` VALUES ('3', '3', 'PDAM');
+INSERT INTO `inm_jenis_fee` VALUES ('4', '4', 'TELKOM');
+INSERT INTO `inm_jenis_fee` VALUES ('5', '5', 'TELKOMSEL');
+INSERT INTO `inm_jenis_fee` VALUES ('6', '6', 'FINANCE');
+INSERT INTO `inm_jenis_fee` VALUES ('7', '7', 'KERETA API');
+INSERT INTO `inm_jenis_fee` VALUES ('8', '8', 'TIKET PESAWAT');
+INSERT INTO `inm_jenis_fee` VALUES ('9', '9', 'AORA TV');
+INSERT INTO `inm_jenis_fee` VALUES ('10', '10', 'ORANGE TV');
+INSERT INTO `inm_jenis_fee` VALUES ('11', '11', 'GENFLIX');
+INSERT INTO `inm_jenis_fee` VALUES ('12', '12', 'INDOVISION');
+INSERT INTO `inm_jenis_fee` VALUES ('13', '13', 'BPJS Kesehatan');

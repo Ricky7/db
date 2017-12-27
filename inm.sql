@@ -26,20 +26,20 @@ CREATE TABLE IF NOT EXISTS `inm_user_status` (
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_admin`;
-CREATE TABLE `inm_admin` (
+CREATE TABLE IF NOT EXISTS `inm_admin` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_admin` VARCHAR(20) NOT NULL,
-	`payment_point_id` VARCHAR(20) NOT NULL,
+	`payment_point_id` VARCHAR(20) NOT NULL UNIQUE,
 	`ca_id` VARCHAR(10) NOT NULL,
 	`jenis_admin_id` INT UNSIGNED NOT NULL,
-	`username` VARCHAR(20) NOT NULL,
+	`username` VARCHAR(20) NOT NULL UNIQUE,
 	`password` VARCHAR(20) NOT NULL,
-	`last_ip_address` VARCHAR(20),
-	`last_login` DATETIME,
-	`last_logout` DATETIME,
-	`last_update` DATETIME,
-	`mac_address` VARCHAR(30),
-	`tgl_create` DATETIME NOT NULL,
+	`last_ip_address` VARCHAR(20) DEFAULT NULL,
+	`last_login` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`last_logout` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`last_update` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`mac_address` VARCHAR(30) DEFAULT NULL,
+	`tgl_create` DATETIME DEFAULT NULL,
 	`status_id` INT(2),
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
@@ -315,5 +315,23 @@ CREATE TABLE `inm_admin_fee` (
   `kode_produk` INT(5) NOT NULL,
   `nominal` DECIMAL(19,0) NOT NULL,
   `tgl_create` DATETIME NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_fee`;
+CREATE TABLE `inm_fee` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `min_range` CHAR(5) DEFAULT NULL,
+  `max_range` CHAR(5) DEFAULT NULL,
+  `nominal` DECIMAL(19,0) NOT NULL,
+  `jenis_fee` INT(2) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_jenis_fee`;
+CREATE TABLE `inm_jenis_fee` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `kode_jenis` INT(5) NOT NULL,
+  `nama_jenis` VARCHAR(20) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
