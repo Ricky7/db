@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `inm_admin` (
 	`ca_id` VARCHAR(10) NOT NULL,
 	`jenis_admin_id` INT UNSIGNED NOT NULL,
 	`username` VARCHAR(20) NOT NULL UNIQUE,
-	`password` VARCHAR(20) NOT NULL,
+	`password` VARCHAR(150) NOT NULL,
 	`last_ip_address` VARCHAR(20) DEFAULT NULL,
 	`last_login` DATETIME DEFAULT '1000-01-01 00:00:00',
 	`last_logout` DATETIME DEFAULT '1000-01-01 00:00:00',

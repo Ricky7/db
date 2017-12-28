@@ -105,7 +105,7 @@ INSERT INTO `inm_user_status` VALUES ('2', '1', 'block');
 
 
 -- tabel inm_admin
-INSERT INTO `inm_admin` VALUES ('1', 'TesDev', '100tesdev001', 'inm101', '1', 'tesdev', 'tesdev', '', NULL, NULL, NULL, '', CURDATE(), '0');
+INSERT INTO `inm_admin` VALUES ('1', 'TesDev', '100tesdev001', 'inm101', '1', 'tesdev', '$2y$10$tAg3ev/0p3PBf24f0sJy8OT2mKJPP/GgY7kCPKueHmdoruwjDI3zK', '', NULL, NULL, NULL, '', CURDATE(), '0');
 
 -- tabel inm_jenis_fee
 INSERT INTO `inm_jenis_fee` VALUES ('1', '1', 'PLN');
