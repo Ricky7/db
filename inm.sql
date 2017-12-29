@@ -14,6 +14,7 @@ CREATE TABLE `inm_user` (
 	`nama_user` VARCHAR(20) NOT NULL,
 	`ip_address` VARCHAR(20) DEFAULT NULL,
 	`cookie` VARCHAR(50) DEFAULT NULL,
+    `tgl_create` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -107,7 +108,6 @@ CREATE TABLE IF NOT EXISTS `inm_history_saldo` (
 	`jenis_transaksi` VARCHAR(30) NOT NULL,
 	`jumlah_transaksi` DECIMAL(19,0) NOT NULL,
 	`tgl_create` DATETIME NOT NULL,
-	`tgl_update` DATETIME,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
