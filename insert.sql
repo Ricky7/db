@@ -121,3 +121,6 @@ INSERT INTO `inm_jenis_fee` VALUES ('10', '10', 'ORANGE TV');
 INSERT INTO `inm_jenis_fee` VALUES ('11', '11', 'GENFLIX');
 INSERT INTO `inm_jenis_fee` VALUES ('12', '12', 'INDOVISION');
 INSERT INTO `inm_jenis_fee` VALUES ('13', '13', 'BPJS Kesehatan');
+
+-- tabel admin-fee
+INSERT INTO 'inm_admin_fee' VALUES  ('1', '', '2500', CURDATE());

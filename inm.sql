@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_langsung_status` (
 DROP TABLE IF EXISTS `inm_mutasi_bank`;
 CREATE TABLE IF NOT EXISTS `inm_mutasi_bank` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `raw` VARCHAR(50) NOT NULL,
+  `raw` VARCHAR(500) NOT NULL UNIQUE,
   `nama_bank` VARCHAR(10) NOT NULL,
   `no_rekening` VARCHAR(20) NOT NULL,
   `tgl_create` DATETIME NOT NULL,
