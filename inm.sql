@@ -5,15 +5,19 @@ DROP TABLE IF EXISTS `inm_user`;
 CREATE TABLE `inm_user` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`payment_point_id` VARCHAR(20) NOT NULL UNIQUE,
+    `nama_user` VARCHAR(20) NOT NULL,
+    `no_telp` VARCHAR(12) NOT NULL,
+    `alamat` VARCHAR(100) NOT NULL,
 	`group_id` VARCHAR(20) NOT NULL,
 	`password` VARCHAR(20) NOT NULL,
 	`ca_id` VARCHAR(10) NOT NULL,
 	`level` VARCHAR(10) NOT NULL,
 	`status_id` INT(2) NOT NULL,
 	`mac_address` VARCHAR(30) DEFAULT NULL,
-	`nama_user` VARCHAR(20) NOT NULL,
 	`ip_address` VARCHAR(20) DEFAULT NULL,
 	`cookie` VARCHAR(50) DEFAULT NULL,
+    `kabupaten` VARCHAR(20) NOT NULL,
+    `provinsi` VARCHAR(20) NOT NULL,
     `tgl_create` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
