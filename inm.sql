@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS `inm_user`;
 CREATE TABLE `inm_user` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`payment_point_id` VARCHAR(20) NOT NULL UNIQUE,
+	`username` VARCHAR(20) NOT NULL UNIQUE,
     `nama_user` VARCHAR(20) NOT NULL,
     `no_telp` VARCHAR(12) NOT NULL,
     `alamat` VARCHAR(100) NOT NULL,
@@ -18,7 +18,9 @@ CREATE TABLE `inm_user` (
 	`cookie` VARCHAR(50) DEFAULT NULL,
     `kabupaten` VARCHAR(20) NOT NULL,
     `provinsi` VARCHAR(20) NOT NULL,
+    `token` VARCHAR(100) DEFAULT NULL,
     `tgl_create` DATETIME NOT NULL,
+    `tgl_update` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -34,7 +36,6 @@ DROP TABLE IF EXISTS `inm_admin`;
 CREATE TABLE IF NOT EXISTS `inm_admin` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_admin` VARCHAR(20) NOT NULL,
-	`payment_point_id` VARCHAR(20) NOT NULL UNIQUE,
 	`ca_id` VARCHAR(10) NOT NULL,
 	`jenis_admin_id` INT UNSIGNED NOT NULL,
 	`username` VARCHAR(20) NOT NULL UNIQUE,
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
 DROP TABLE IF EXISTS `inm_saldo_loket`;
 CREATE TABLE IF NOT EXISTS `inm_saldo_loket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL UNIQUE,
 	`jumlah_saldo` DECIMAL(19,0) NOT NULL,
 	`tgl_update` DATETIME,
   PRIMARY KEY `pk_`(`id`)
@@ -137,20 +138,22 @@ CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `transaksi_id` BIGINT UNSIGNED NOT NULL,
 	`status_id` INT(2) NOT NULL,
+    `id_pelanggan` VARCHAR(30),
 	`nama_pelanggan` VARCHAR(30) NOT NULL,
 	`lembar` INT(2) NOT NULL,
 	`jumlah_tagihan` DECIMAL(19,0) NOT NULL,
 	`biaya_admin` INT(5) NOT NULL,
 	`total_tagihan` DECIMAL(19,0) NOT NULL,
-	`jenis_transkasi` VARCHAR(20) NOT NULL,
-	`inf_referensi` VARCHAR(50) NOT NULL,
-	`referensi_number` VARCHAR(50) NOT NULL,
-	`terbilang` VARCHAR(30) NOT NULL,
-	`kode_cetak` VARCHAR(20),
-	`kode_supplier` VARCHAR(20) NOT NULL,
+    `jenis_transaksi` VARCHAR(20) NOT NULL,
+    `produk_id` INT UNSIGNED NOT NULL,
+	`inm_referensi` VARCHAR(50) NOT NULL,
+	`referensi_vendor` VARCHAR(50) NOT NULL,
+	`terbilang` VARCHAR(50) NOT NULL,
+	`kode_transaksi` VARCHAR(20),
 	`print_out` TEXT NOT NULL,
 	`keterangan` VARCHAR(200) NOT NULL,
-	`response` TEXT NOT NULL,
+	`response_message` TEXT NOT NULL,
+    `tgl_transaksi` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
