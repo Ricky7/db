@@ -1,0 +1,32 @@
+** tabel inm_users
+- perubahan nama tabel dari inm_user -> inm_users
+- penambahan field token, tgl_update, kabupaten, provinsi, email
+- indexing field
+- buat relasi ke inm_users_status
+- ubah type/size data status_id
+
+** tabel inm_users_status
+- perubahan nama tabel dari inm_user_status -> inm_users_status
+- hapus field kode_status
+- status menjadi 1 = Aktif 2 = Block
+- ubah type/size data id
+
+** tabel inm_saldo_loket
+- buat relasi ke tabel inm_users
+
+** tabel inm_history_saldo
+- deleted
+
+** tabel inm_status_history
+- deleted
+
+** tabel inm_transaksi
+- indexing
+- buat relasi
+
+** tabel inm_transaksi_detail
+- indexing
+- buat relasi
+
+** tabel inm_transaksi_detail_status
+- hapus kode_status

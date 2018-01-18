@@ -91,17 +91,17 @@ INSERT INTO `inm_status_history` VALUES ('6', '6', 'expired');
 -- id
 -- kode_status (int 5)
 -- nama_status (varchar 20)
-INSERT INTO `inm_transaksi_detail_status` VALUES ('1', '0', 'proses');
-INSERT INTO `inm_transaksi_detail_status` VALUES ('2', '1', 'gagal');
-INSERT INTO `inm_transaksi_detail_status` VALUES ('3', '2', 'sukses');
+INSERT INTO `inm_transaksi_detail_status` VALUES ('1', 'proses');
+INSERT INTO `inm_transaksi_detail_status` VALUES ('2', 'gagal');
+INSERT INTO `inm_transaksi_detail_status` VALUES ('3', 'sukses');
 
 
 -- tabel inm_user_status
 -- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
-INSERT INTO `inm_user_status` VALUES ('1', '0', 'unblock');
-INSERT INTO `inm_user_status` VALUES ('2', '1', 'block');
+INSERT INTO `inm_users_status` VALUES ('1', 'Aktif');
+INSERT INTO `inm_users_status` VALUES ('2', 'Block');
 
 
 -- tabel inm_admin
