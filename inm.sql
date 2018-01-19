@@ -165,6 +165,74 @@ CREATE TABLE IF NOT EXISTS `inm_status_admin` (
 INSERT INTO `inm_status_admin` VALUES ('1', 'Aktif');
 INSERT INTO `inm_status_admin` VALUES ('2', 'Block');
 
+DROP TABLE IF EXISTS `inm_produk`;
+CREATE TABLE IF NOT EXISTS `inm_produk` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `jenis_produk_id` TINYINT(4) NOT NULL,
+  `vendor_id` INT UNSIGNED NOT NULL,
+	`nama_singkat` VARCHAR(10) NOT NULL,
+	`nama_lengkap` VARCHAR(20) NOT NULL,
+	`kode_produk` INT(5) NOT NULL,
+  `keterangan` VARCHAR(30) DEFAULT NULL,
+  `status_id` TINYINT(4) NOT NULL,
+  PRIMARY KEY `pk_`(`id`),
+  INDEX `jenis_produk_id` (`jenis_produk_id` ASC),
+  INDEX `vendor_id` (`vendor_id` ASC),
+  INDEX `kode_produk` (`kode_produk` ASC),
+  CONSTRAINT `fk_produk_jenis_produk`
+    FOREIGN KEY (`jenis_produk_id`)
+    REFERENCES `inm_jenis_produk` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produk_status_produk`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `inm_status_produk` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produk_vendor`
+    FOREIGN KEY (`vendor_id`)
+    REFERENCES `inm_vendor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_jenis_produk`;
+CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
+  `id` TINYINT(4) NOT NULL,
+  `nama_jenis` VARCHAR(20) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+INSERT INTO inm_jenis_produk
+VALUES
+('1', 'PLN Pospaid'),
+('2', 'PLN Prepaid'),
+('3', 'PLN Non Taglis'),
+('4', 'PDAM'),
+('5', 'BPJS');
+
+DROP TABLE IF EXISTS `inm_status_produk`;
+CREATE TABLE IF NOT EXISTS `inm_status_produk` (
+  `id` TINYINT(4) NOT NULL,
+  `nama_status` VARCHAR(20) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+INSERT INTO `inm_status_produk` VALUES ('1', 'Aktif');
+INSERT INTO `inm_status_produk` VALUES ('2', 'Block');
+
+DROP TABLE IF EXISTS `inm_vendor`;
+CREATE TABLE IF NOT EXISTS `inm_vendor` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_vendor` VARCHAR(10) NOT NULL,
+	`kode_vendor` INT(5) NOT NULL,
+	`kode_produk_vendor` VARCHAR(10) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+
+
+
 -- =========================================================================================================================
 
 -- DROP TABLE IF EXISTS `inm_history_saldo`;
@@ -188,27 +256,7 @@ INSERT INTO `inm_status_admin` VALUES ('2', 'Block');
 
 
 
-DROP TABLE IF EXISTS `inm_produk`;
-CREATE TABLE IF NOT EXISTS `inm_produk` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `jenis_produk_id` INT UNSIGNED NOT NULL,
-	`nama_singkat` VARCHAR(10) NOT NULL,
-	`nama_lengkap` VARCHAR(20) NOT NULL,
-	`kode_produk` INT(5) NOT NULL,
-	`vendor` VARCHAR(10) NOT NULL,
-	`kode_vendor` INT(5) NOT NULL,
-	`kode_produk_vendor` VARCHAR(10) NOT NULL,
-    `keterangan` VARCHAR(30) NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_jenis_produk`;
-CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_jenis` INT(5) NOT NULL,
-  `nama_jenis` VARCHAR(20) NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
 
 
 DROP TABLE IF EXISTS `inm_akun_bank`;
