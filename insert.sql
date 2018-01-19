@@ -71,8 +71,8 @@ INSERT INTO `inm_mutasi_bank_status` VALUES ('2', '2', 'sukses');
 -- id
 -- kode_status (int 5)
 -- nama_status (varchar 10)
-INSERT INTO `inm_status_admin` VALUES ('1', '0', 'unblock');
-INSERT INTO `inm_status_admin` VALUES ('2', '1', 'block');
+INSERT INTO `inm_status_admin` VALUES ('1', 'Aktif');
+INSERT INTO `inm_status_admin` VALUES ('2', 'Block');
 
 
 -- tabel inm_status_history

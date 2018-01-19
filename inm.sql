@@ -6,11 +6,11 @@ CREATE TABLE IF NOT EXISTS `inm_users` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(20) NOT NULL,
     `nama_user` VARCHAR(30) NOT NULL,
-    `email` VARCHAR(20) DEFAULT NULL,
+    `email` VARCHAR(50) DEFAULT NULL,
     `no_telp` VARCHAR(12) NOT NULL,
     `alamat` VARCHAR(100) NOT NULL,
 	`group_id` VARCHAR(20) NOT NULL,
-	`password` VARCHAR(50) NOT NULL,
+	`password` VARCHAR(300) NOT NULL,
 	`ca_id` VARCHAR(10) NOT NULL,
 	`level` VARCHAR(10) NOT NULL,
 	`status_id` TINYINT(4) NOT NULL,
@@ -112,6 +112,59 @@ INSERT INTO `inm_transaksi_detail_status` VALUES ('1', 'Proses');
 INSERT INTO `inm_transaksi_detail_status` VALUES ('2', 'Gagal');
 INSERT INTO `inm_transaksi_detail_status` VALUES ('3', 'Sukses');
 
+DROP TABLE IF EXISTS `inm_admin`;
+CREATE TABLE IF NOT EXISTS `inm_admin` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_admin` VARCHAR(20) NOT NULL,
+	`ca_id` VARCHAR(10) NOT NULL,
+	`jenis_admin_id` TINYINT(4) NOT NULL,
+	`username` VARCHAR(20) NOT NULL UNIQUE,
+	`password` VARCHAR(300) NOT NULL,
+	`last_ip_address` VARCHAR(20) DEFAULT NULL,
+	`last_login` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`last_logout` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`last_update` DATETIME DEFAULT '1000-01-01 00:00:00',
+	`mac_address` VARCHAR(30) DEFAULT NULL,
+	`tgl_create` DATETIME DEFAULT NULL,
+	`status_id` TINYINT(4) NOT NULL,
+  PRIMARY KEY `pk_`(`id`),
+  INDEX `jenis_admin_id` (`jenis_admin_id` ASC),
+  CONSTRAINT `fk_admin_jenis_admin`
+    FOREIGN KEY (`jenis_admin_id`)
+    REFERENCES `inm_jenis_admin` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_admin_status_admin`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `inm_status_admin` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+INSERT INTO `inm_admin` VALUES ('1', 'TesDev', 'inm101', '1', 'admin', '$2y$10$tAg3ev/0p3PBf24f0sJy8OT2mKJPP/GgY7kCPKueHmdoruwjDI3zK', '', NULL, NULL, NULL, '', CURDATE(), '1');
+
+DROP TABLE IF EXISTS `inm_jenis_admin`;
+CREATE TABLE IF NOT EXISTS `inm_jenis_admin` (
+  `id` TINYINT(4) NOT NULL,
+  `nama_jenis` VARCHAR(20),
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+INSERT INTO `inm_jenis_admin` VALUES ('1', 'Superadmin');
+INSERT INTO `inm_jenis_admin` VALUES ('2', 'Administrator');
+INSERT INTO `inm_jenis_admin` VALUES ('3', 'Rekon');
+INSERT INTO `inm_jenis_admin` VALUES ('4', 'Helpdesk');
+
+DROP TABLE IF EXISTS `inm_status_admin`;
+CREATE TABLE IF NOT EXISTS `inm_status_admin` (
+  `id` TINYINT(4) NOT NULL,
+  `nama_status` VARCHAR(10),
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+INSERT INTO `inm_status_admin` VALUES ('1', 'Aktif');
+INSERT INTO `inm_status_admin` VALUES ('2', 'Block');
+
 -- =========================================================================================================================
 
 -- DROP TABLE IF EXISTS `inm_history_saldo`;
@@ -133,47 +186,7 @@ INSERT INTO `inm_transaksi_detail_status` VALUES ('3', 'Sukses');
 --   PRIMARY KEY `pk_`(`id`)
 -- ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_admin`;
-CREATE TABLE IF NOT EXISTS `inm_admin` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nama_admin` VARCHAR(20) NOT NULL,
-	`ca_id` VARCHAR(10) NOT NULL,
-	`jenis_admin_id` INT UNSIGNED NOT NULL,
-	`username` VARCHAR(20) NOT NULL UNIQUE,
-	`password` VARCHAR(150) NOT NULL,
-	`last_ip_address` VARCHAR(20) DEFAULT NULL,
-	`last_login` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`last_logout` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`last_update` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`mac_address` VARCHAR(30) DEFAULT NULL,
-	`tgl_create` DATETIME DEFAULT NULL,
-	`status_id` INT(2),
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_jenis_admin`;
-CREATE TABLE IF NOT EXISTS `inm_jenis_admin` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_jenis` INT(5) NOT NULL,
-  `nama_jenis` VARCHAR(20),
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `inm_jenis_admin_detail`;
-CREATE TABLE IF NOT EXISTS `inm_jenis_admin_detail` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `jenis_id` INT UNSIGNED NOT NULL,
-  `fungsi_admin_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `inm_status_admin`;
-CREATE TABLE IF NOT EXISTS `inm_status_admin` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_status` INT(5) NOT NULL,
-  `nama_status` VARCHAR(10),
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_produk`;
 CREATE TABLE IF NOT EXISTS `inm_produk` (
@@ -197,48 +210,6 @@ CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
-
-
-DROP TABLE IF EXISTS `inm_transaksi`;
-CREATE TABLE IF NOT EXISTS `inm_transaksi` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT UNSIGNED NOT NULL,
-	`kode_transaksi` VARCHAR(100) NOT NULL,
-	`tgl_transaksi` DATETIME NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `inm_transaksi_detail`;
-CREATE TABLE IF NOT EXISTS `inm_transaksi_detail` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `transaksi_id` BIGINT UNSIGNED NOT NULL,
-	`status_id` INT(2) NOT NULL,
-    `id_pelanggan` VARCHAR(30),
-	`nama_pelanggan` VARCHAR(30) NOT NULL,
-	`lembar` INT(2) NOT NULL,
-	`jumlah_tagihan` DECIMAL(19,0) NOT NULL,
-	`biaya_admin` INT(5) NOT NULL,
-	`total_tagihan` DECIMAL(19,0) NOT NULL,
-    `jenis_transaksi` VARCHAR(20) NOT NULL,
-    `produk_id` INT UNSIGNED NOT NULL,
-	`inm_referensi` VARCHAR(50) NOT NULL,
-	`referensi_vendor` VARCHAR(50) NOT NULL,
-	`terbilang` VARCHAR(50) NOT NULL,
-	`kode_transaksi` VARCHAR(20),
-	`print_out` TEXT NOT NULL,
-	`keterangan` VARCHAR(200) NOT NULL,
-	`response_message` TEXT NOT NULL,
-    `tgl_transaksi` DATETIME NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `inm_transaksi_detail_status`;
-CREATE TABLE IF NOT EXISTS `inm_transaksi_detail_status` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_status` INT(5) NOT NULL,
-  `nama_status` VARCHAR(20) NOT NULL,
-  PRIMARY KEY `pk_`(`id`)
-) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_akun_bank`;
 CREATE TABLE IF NOT EXISTS `inm_akun_bank` (
