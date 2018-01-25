@@ -173,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `inm_produk` (
 	`nama_singkat` VARCHAR(10) NOT NULL,
 	`nama_lengkap` VARCHAR(20) NOT NULL,
 	`kode_produk` INT(5) NOT NULL,
+  `kode_produk_vendor` VARCHAR(10) NOT NULL,
   `keterangan` VARCHAR(30) DEFAULT NULL,
   `status_id` TINYINT(4) NOT NULL,
   PRIMARY KEY `pk_`(`id`),
@@ -205,11 +206,9 @@ CREATE TABLE IF NOT EXISTS `inm_jenis_produk` (
 
 INSERT INTO inm_jenis_produk
 VALUES
-('1', 'PLN Pospaid'),
-('2', 'PLN Prepaid'),
-('3', 'PLN Non Taglis'),
-('4', 'PDAM'),
-('5', 'BPJS');
+('1', 'PLN'),
+('2', 'PDAM'),
+('3', 'BPJS');
 
 DROP TABLE IF EXISTS `inm_status_produk`;
 CREATE TABLE IF NOT EXISTS `inm_status_produk` (
@@ -226,11 +225,51 @@ CREATE TABLE IF NOT EXISTS `inm_vendor` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_vendor` VARCHAR(10) NOT NULL,
 	`kode_vendor` INT(5) NOT NULL,
-	`kode_produk_vendor` VARCHAR(10) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `inm_akun_bank`;
+CREATE TABLE IF NOT EXISTS `inm_akun_bank` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_bank` VARCHAR(30) NOT NULL,
+  `no_rekening` VARCHAR(20) NOT NULL,
+  `nama_akun` VARCHAR(50) NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `inm_log_types`;
+CREATE TABLE IF NOT EXISTS `inm_log_types` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_log` VARCHAR(30) NOT NULL,
+  `tgl_create` DATETIME NOT NULL,
+  PRIMARY KEY `pk_`(`id`)
+) ENGINE = InnoDB;
+
+INSERT INTO `inm_log_types` VALUES ('1', 'Deposit', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('2', 'User Disabled By Admin', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('3', 'User Enabled By Admin', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('4', 'Mac Address Reset', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('5', 'Password Reset', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('6', 'Password Changed', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('7', 'Account Created', CURDATE());
+
+DROP TABLE IF EXISTS `inm_log_activities`;
+CREATE TABLE IF NOT EXISTS `inm_log_activities` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `log_type_id` INT UNSIGNED DEFAULT NULL,
+  `user_id` BIGINT UNSIGNED DEFAULT NULL,
+  `json_value` TEXT COLLATE utf8_unicode_ci,
+  `tgl_create` DATETIME DEFAULT NULL,
+  `ip` VARCHAR(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY `pk_`(`id`),
+  INDEX `log_type_id` (`log_type_id` ASC),
+  INDEX `tgl_create` (`tgl_create` ASC),
+  CONSTRAINT `fk_activities_types`
+    FOREIGN KEY (`log_type_id`)
+    REFERENCES `inm_log_types` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 
 -- =========================================================================================================================
@@ -256,17 +295,6 @@ CREATE TABLE IF NOT EXISTS `inm_vendor` (
 
 
 
-
-
-
-DROP TABLE IF EXISTS `inm_akun_bank`;
-CREATE TABLE IF NOT EXISTS `inm_akun_bank` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nama_bank` VARCHAR(30) NOT NULL,
-  `no_rekening` VARCHAR(20) NOT NULL,
-  `nama_akun` VARCHAR(50) NOT NULL,
-  PRIMARY KEY `pk_id`(`id`)
-) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_deposit_langsung`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (

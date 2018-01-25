@@ -30,3 +30,78 @@
 
 ** tabel inm_transaksi_detail_status
 - hapus kode_status
+
+
+SELECT inm_transaksi.tgl_transaksi,
+	SUM( IF((inm_jenis_produk.nama_jenis) = PLN, COUNT(inm_transaksi_detail),0) )AS PLN,
+    SUM( IF((inm_jenis_produk.nama_jenis) = PDAM, COUNT(inm_transaksi_detail),0) )AS PDAM,
+    SUM( IF((inm_jenis_produk.nama_jenis) = BPJS, COUNT(inm_transaksi_detail),0) )AS BPJS
+FROM inm_transaksi_detail
+INNER JOIN inm_transaksi
+	ON inm_transaksi_detail.transaksi_id = inm_transaksi_id
+INNER JOIN inm_produk
+	ON inm_transaksi_detail.produk_id = inm_produk_id
+INNER JOIN inm_jenis_produk
+	ON inm_produk.jenis_produk_id = inm_jenis_produk.id
+GROUP BY inm_transaksi.tgl_transaksi
+
+SET @sql_dynamic = (
+	SELECT
+		GROUP_CONCAT( DISTINCT
+			CONCAT(
+				'SUM( IF(inm_jenis_produk.nama_jenis = '
+				, inm_jenis_produk.nama_jenis
+				, ', COUNT(inm_transaksi_detail),0) ) AS inm_'
+				, inm_jenis_produk.nama_jenis
+			)
+		)
+	FROM inm_transaksi_detail
+		INNER JOIN inm_jenis_produk
+			ON inm_transaksi_detail.produk_id = inm_jenis_produk.id
+);
+SET @sql = CONCAT('SELECT inm_transaksi.tgl_transaksi, ',
+			  @sql_dynamic, '
+		   FROM inm_transaksi_detail
+			INNER JOIN inm_transaksi
+				ON inm_transaksi_detail.transaksi_id = inm_transaksi_id
+			INNER JOIN inm_produk
+				ON inm_transaksi_detail.produk_id = inm_produk_id
+			INNER JOIN inm_jenis_produk
+				ON inm_produk.jenis_produk_id = inm_jenis_produk.id
+			GROUP BY inm_transaksi.tgl_transaksi WITH ROLLUP'
+	   );
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+SET @sql_dynamic = (
+	SELECT
+		GROUP_CONCAT( DISTINCT
+			CONCAT(
+				'SUM( IF(inm_jenis_produk.nama_jenis = '
+				, inm_jenis_produk.nama_jenis
+				, ', inm_transaksi_detail.id,0) ) AS inm_'
+				, inm_jenis_produk.nama_jenis
+			)
+		)
+	FROM inm_transaksi_detail
+		INNER JOIN inm_jenis_produk
+			ON inm_transaksi_detail.produk_id = inm_jenis_produk.id
+);
+SET @sql = CONCAT('SELECT inm_transaksi.tgl_transaksi, ',
+			  @sql_dynamic, '
+		   FROM inm_transaksi_detail
+			INNER JOIN inm_transaksi
+				ON inm_transaksi_detail.transaksi_id = inm_transaksi.id
+			INNER JOIN inm_produk
+				ON inm_transaksi_detail.produk_id = inm_produk.id
+			INNER JOIN inm_jenis_produk
+				ON inm_produk.jenis_produk_id = inm_jenis_produk.id
+			GROUP BY inm_transaksi.tgl_transaksi WITH ROLLUP'
+	   );
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
