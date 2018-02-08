@@ -5,8 +5,8 @@
 -- nama_bank (varchar 30)
 -- no_rekening (varchar 20)
 -- nama_akun (varchar 50)
-INSERT INTO `inm_akun_bank` VALUES ('1', 'MANDIRI', '1050012552489', 'PT. Interprima Nusantara Mandiri');
-INSERT INTO `inm_akun_bank` VALUES ('2', 'BNI', '249745768', 'PT. Interprima Nusantara Mandiri');
+INSERT INTO `inm_akun_bank` VALUES ('1', 'MANDIRI', '1050010084907', 'PT. Interprima Nusantara Mandiri');
+INSERT INTO `inm_akun_bank` VALUES ('2', 'BNI', '0249745768', 'PT. Interprima Nusantara Mandiri');
 INSERT INTO `inm_akun_bank` VALUES ('3', 'BRI', '005301001652308', 'PT. Interprima Nusantara Mandiri');
 INSERT INTO `inm_akun_bank` VALUES ('4', 'Bukopin', '1003637022', 'PT. Interprima Nusantara Mandiri');
 

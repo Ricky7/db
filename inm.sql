@@ -5,23 +5,23 @@ DROP TABLE IF EXISTS `inm_users`;
 CREATE TABLE IF NOT EXISTS `inm_users` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(20) NOT NULL,
-    `nama_user` VARCHAR(30) NOT NULL,
-    `email` VARCHAR(50) DEFAULT NULL,
-    `no_telp` VARCHAR(12) NOT NULL,
-    `alamat` VARCHAR(100) NOT NULL,
+  `nama_user` VARCHAR(30) NOT NULL,
+  `email` VARCHAR(50) DEFAULT NULL,
+  `no_telp` VARCHAR(12) NOT NULL,
+  `alamat` VARCHAR(100) NOT NULL,
 	`group_id` VARCHAR(20) NOT NULL,
 	`password` VARCHAR(300) NOT NULL,
 	`ca_id` VARCHAR(10) NOT NULL,
 	`level` VARCHAR(10) NOT NULL,
 	`status_id` TINYINT(4) NOT NULL,
-	`mac_address` VARCHAR(20) DEFAULT NULL,
+	`mac_address` VARCHAR(20) DEFAULT '00-00-00-00-00-00',
 	`ip_address` VARCHAR(20) DEFAULT NULL,
 	`cookie` VARCHAR(50) DEFAULT NULL,
-    `kabupaten` VARCHAR(20) NOT NULL,
-    `provinsi` VARCHAR(20) NOT NULL,
-    `token` VARCHAR(100) DEFAULT NULL,
-    `tgl_create` DATETIME NOT NULL,
-    `tgl_update` DATETIME NOT NULL,
+  `kabupaten` VARCHAR(20) NOT NULL,
+  `provinsi` VARCHAR(20) NOT NULL,
+  `token` VARCHAR(100) DEFAULT NULL,
+  `tgl_create` DATETIME NOT NULL,
+  `tgl_update` DATETIME NOT NULL,
   PRIMARY KEY `pk_`(`id`),
   CONSTRAINT `uc_users` UNIQUE (`username`,`email`),
   INDEX `nama_user` (`nama_user` ASC),
@@ -116,15 +116,10 @@ DROP TABLE IF EXISTS `inm_admin`;
 CREATE TABLE IF NOT EXISTS `inm_admin` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_admin` VARCHAR(20) NOT NULL,
-	`ca_id` VARCHAR(10) NOT NULL,
 	`jenis_admin_id` TINYINT(4) NOT NULL,
 	`username` VARCHAR(20) NOT NULL UNIQUE,
 	`password` VARCHAR(300) NOT NULL,
-	`last_ip_address` VARCHAR(20) DEFAULT NULL,
-	`last_login` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`last_logout` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`last_update` DATETIME DEFAULT '1000-01-01 00:00:00',
-	`mac_address` VARCHAR(30) DEFAULT NULL,
+	`mac_address` VARCHAR(30) DEFAULT '00-00-00-00-00-00',
 	`tgl_create` DATETIME DEFAULT NULL,
 	`status_id` TINYINT(4) NOT NULL,
   PRIMARY KEY `pk_`(`id`),
@@ -141,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `inm_admin` (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
-INSERT INTO `inm_admin` VALUES ('1', 'TesDev', 'inm101', '1', 'admin', '$2y$10$tAg3ev/0p3PBf24f0sJy8OT2mKJPP/GgY7kCPKueHmdoruwjDI3zK', '', NULL, NULL, NULL, '', CURDATE(), '1');
+INSERT INTO `inm_admin` VALUES ('1', 'TesDev', '1', 'admin', '$2y$10$tAg3ev/0p3PBf24f0sJy8OT2mKJPP/GgY7kCPKueHmdoruwjDI3zK', '00-00-00-00-00-00', CURDATE(), '1');
 
 DROP TABLE IF EXISTS `inm_jenis_admin`;
 CREATE TABLE IF NOT EXISTS `inm_jenis_admin` (
@@ -245,13 +240,15 @@ CREATE TABLE IF NOT EXISTS `inm_log_types` (
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
-INSERT INTO `inm_log_types` VALUES ('1', 'Deposit', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('2', 'User Disabled By Admin', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('3', 'User Enabled By Admin', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('4', 'Mac Address Reset', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('5', 'Password Reset', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('6', 'Password Changed', CURDATE());
-INSERT INTO `inm_log_types` VALUES ('7', 'Account Created', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('1', 'Deposit Langsung', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('2', 'Deposit BS', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('3', 'Deposit Tiket', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('4', 'User Disabled By Admin', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('5', 'User Enabled By Admin', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('6', 'Mac Address Reset', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('7', 'Password Reset', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('8', 'Password Changed', CURDATE());
+INSERT INTO `inm_log_types` VALUES ('9', 'Account Created', CURDATE());
 
 DROP TABLE IF EXISTS `inm_log_activities`;
 CREATE TABLE IF NOT EXISTS `inm_log_activities` (
@@ -271,6 +268,30 @@ CREATE TABLE IF NOT EXISTS `inm_log_activities` (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `inm_deposit_langsung`;
+CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  `no_kwitansi` BIGINT(50) NOT NULL UNIQUE,
+  `nominal` DECIMAL(19,0) NOT NULL,
+  `print_out` TEXT NOT NULL,
+  `admin_id` INT UNSIGNED NOT NULL,
+  `tgl_create` DATETIME DEFAULT NULL,
+  PRIMARY KEY `pk_id`(`id`),
+  INDEX `user_id` (`user_id` ASC),
+  INDEX `admin_id` (`admin_id` ASC),
+  INDEX `tgl_create` (`tgl_create` ASC),
+  CONSTRAINT `fk_depolangsung_users`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `inm_users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_depolangsung_admin`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `inm_admin` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 -- =========================================================================================================================
 
@@ -464,3 +485,6 @@ CREATE TABLE `inm_jenis_fee` (
   `nama_jenis` VARCHAR(20) NOT NULL,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
+
+
+ALTER TABLE `inm_admin` DROP COLUMN `ca_id`;
