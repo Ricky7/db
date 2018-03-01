@@ -220,6 +220,7 @@ CREATE TABLE IF NOT EXISTS `inm_vendor` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama_vendor` VARCHAR(10) NOT NULL,
 	`kode_vendor` INT(5) NOT NULL,
+  `token` TEXT,
   PRIMARY KEY `pk_`(`id`)
 ) ENGINE = InnoDB;
 
@@ -293,43 +294,84 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
--- =========================================================================================================================
-
--- DROP TABLE IF EXISTS `inm_history_saldo`;
--- CREATE TABLE IF NOT EXISTS `inm_history_saldo` (
---   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
---   `user_id` BIGINT UNSIGNED NOT NULL,
--- 	`status_id` TINYINT(4) NOT NULL,
--- 	`jenis_transaksi` VARCHAR(30) NOT NULL,
--- 	`jumlah_transaksi` DECIMAL(19,0) NOT NULL,
--- 	`tgl_create` DATETIME NOT NULL,
---   PRIMARY KEY `pk_`(`id`)
--- ) ENGINE = InnoDB;
---
--- DROP TABLE IF EXISTS `inm_status_history`;
--- CREATE TABLE IF NOT EXISTS `inm_status_history` (
---   `id` TINYINT(4) NOT NULL,
---   `kode_status` INT(5) NOT NULL,
---   `nama_status` VARCHAR(10) NOT NULL,
---   PRIMARY KEY `pk_`(`id`)
--- ) ENGINE = InnoDB;
-
-
-
-
-DROP TABLE IF EXISTS `inm_deposit_langsung`;
-CREATE TABLE IF NOT EXISTS `inm_deposit_langsung` (
+DROP TABLE IF EXISTS `inm_mutasi_bank`;
+CREATE TABLE IF NOT EXISTS `inm_mutasi_bank` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` BIGINT UNSIGNED NOT NULL,
-  `tgl_setor` DATE NOT NULL,
+  `raw` VARCHAR(700) NOT NULL UNIQUE,
+  `nama_bank` VARCHAR(10),
+  `no_rekening` VARCHAR(20),
   `tgl_create` DATETIME NOT NULL,
-  `nominal` DECIMAL(19,0) NOT NULL,
-  `keterangan` VARCHAR(50),
-  `admin_id` INT NOT NULL,
-  `bukti_bayar` VARCHAR(30) NOT NULL,
-  `status_id` INT(2) NOT NULL,
+  `tgl_transfer` DATE,
+  `waktu_transfer` TIME,
+  `keterangan` VARCHAR(100),
+  `nominal` DECIMAL(19,0),
+  `status_id` TINYINT(4) NOT NULL,
+  `admin_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY `pk_id`(`id`),
+  INDEX `tgl_create` (`tgl_create` ASC),
+  INDEX `status_id` (`status_id` ASC),
+  INDEX `admin_id` (`admin_id` ASC)
+) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `inm_mutasi_bank_status`;
+CREATE TABLE IF NOT EXISTS `inm_mutasi_bank_status` (
+  `id` TINYINT(4) NOT NULL AUTO_INCREMENT,
+  `nama_status` VARCHAR(10),
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
+
+INSERT INTO `inm_mutasi_bank_status` VALUES ('1', 'proses');
+INSERT INTO `inm_mutasi_bank_status` VALUES ('2', 'sukses');
+
+ALTER TABLE `inm_mutasi_bank`
+ADD CONSTRAINT `fk_mutasi_admin`
+  FOREIGN KEY (`admin_id`)
+  REFERENCES `inm_admin` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION
+
+ALTER TABLE `inm_mutasi_bank`
+ADD CONSTRAINT `fk_mutasi_status`
+  FOREIGN KEY (`status_id`)
+  REFERENCES `inm_mutasi_bank_status` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION
+
+  CREATE TABLE IF NOT EXISTS `inm_dbs` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` BIGINT UNSIGNED NOT NULL,
+    `nominal` DECIMAL(19,0),
+    `tgl_create` DATETIME,
+    `status_id` TINYINT(4) NOT NULL,
+    `admin_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY `pk_`(`id`)
+  ) ENGINE = InnoDB;
+
+  DROP TABLE IF EXISTS `inm_dbs_status`;
+  CREATE TABLE IF NOT EXISTS `inm_dbs_status` (
+    `id` TINYINT(4) NOT NULL AUTO_INCREMENT,
+    `nama_status` VARCHAR(10),
+    PRIMARY KEY `pk_id`(`id`)
+  ) ENGINE = InnoDB;
+
+  INSERT INTO `inm_dbs_status` VALUES ('1', 'pinjam');
+  INSERT INTO `inm_dbs_status` VALUES ('2', 'lunas');
+
+  ALTER TABLE `inm_dbs`
+  ADD CONSTRAINT `fk_dbs_status`
+    FOREIGN KEY (`status_id`)
+    REFERENCES `inm_dbs_status` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+
+  ALTER TABLE `inm_dbs`
+  ADD CONSTRAINT `fk_dbs_admin`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `inm_admin` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+-- =========================================================================================================================
+
 
 DROP TABLE IF EXISTS `inm_deposit_tiket`;
 CREATE TABLE IF NOT EXISTS `inm_deposit_tiket` (
@@ -354,39 +396,7 @@ CREATE TABLE IF NOT EXISTS `inm_deposit_tiket_status` (
   PRIMARY KEY `pk_id`(`id`)
 ) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_deposit_langsung_status`;
-CREATE TABLE IF NOT EXISTS `inm_deposit_langsung_status` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_status` INT(5) NOT NULL,
-  `nama_status` VARCHAR(10) NOT NULL,
-  PRIMARY KEY `pk_id`(`id`)
-) ENGINE = InnoDB;
 
-DROP TABLE IF EXISTS `inm_mutasi_bank`;
-CREATE TABLE IF NOT EXISTS `inm_mutasi_bank` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `raw` VARCHAR(500) NOT NULL UNIQUE,
-  `nama_bank` VARCHAR(10) NOT NULL,
-  `no_rekening` VARCHAR(20) NOT NULL,
-  `tgl_create` DATETIME NOT NULL,
-  `tgl_transfer` DATE NOT NULL,
-  `waktu_transfer` TIME NOT NULL,
-  `keterangan` VARCHAR(100),
-  `debit` DECIMAL(19,0),
-  `kredit` DECIMAL(19,0),
-  `status_id` INT(5) NOT NULL,
-  `ca_id` VARCHAR(10) NOT NULL,
-  `admin_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY `pk_id`(`id`)
-) ENGINE = InnoDB;
-
-DROP TABLE IF EXISTS `inm_mutasi_bank_status`;
-CREATE TABLE IF NOT EXISTS `inm_mutasi_bank_status` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `kode_status` INT(5) NOT NULL,
-  `nama_status` VARCHAR(10),
-  PRIMARY KEY `pk_id`(`id`)
-) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `inm_pinjaman`;
 CREATE TABLE IF NOT EXISTS `inm_pinjaman` (

@@ -124,3 +124,12 @@ INSERT INTO `inm_jenis_fee` VALUES ('13', '13', 'BPJS Kesehatan');
 
 -- tabel admin-fee
 INSERT INTO 'inm_admin_fee' VALUES  ('1', '', '2500', CURDATE());
+
+
+ALTER TABLE `inm_users`
+  MODIFY `nama_user` VARCHAR(30) DEFAULT NULL,
+  MODIFY `no_telp` VARCHAR(12) DEFAULT NULL,
+  MODIFY `alamat` VARCHAR(100) DEFAULT NULL,
+  MODIFY `password` VARCHAR(300) DEFAULT NULL,
+  MODIFY `kabupaten` VARCHAR(20) DEFAULT NULL,
+  MODIFY `provinsi` VARCHAR(20) DEFAULT NULL;
